@@ -1,4 +1,4 @@
-name: TechDocs
+name: CI to test
 
 on: pull_request
 
