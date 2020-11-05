@@ -1,3 +1,4 @@
+# Workflow triggered when there is a new Release on GitHub
 name: TechDocs container release on DockerHub
 
 on:
@@ -23,9 +24,6 @@ jobs:
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
-
-      - name: Log GITHUB_REF
-        run: echo ${{ steps.get_version.outputs.VERSION }}
 
       - name: Build and push
         id: docker_build
