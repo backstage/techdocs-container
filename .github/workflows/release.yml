@@ -20,15 +20,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }} # This is not the actual password of the user, just a token
 
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+
       - name: Log GITHUB_REF
-        run: echo ${{ GITHUB_REF }}
+        run: echo ${{ steps.get_version.outputs.VERSION }}
 
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: spotify/techdocs:${{ GITHUB_REF }}
+          tags: spotify/techdocs:${{ steps.get_version.outputs.VERSION }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
