@@ -24,8 +24,8 @@ Then open up `http://localhost:8000` on your local machine.
 
 This container is published on DockerHub - https://hub.docker.com/r/spotify/techdocs
 
-The publishing is configured by [Automated Builds](https://hub.docker.com/repository/docker/spotify/techdocs/builds/edit) feature on Docker Hub which is triggered from GitHub (on new commits and releases). @backstage/techdocs-core team has access to the settings.
+The release flow is managed by a [GitHub actions workflow](.github/workflows/release-tag.yml). Whenever a new [release](https://github.com/backstage/techdocs-container/releases) is published on GitHub, the workflow pushes the tag to DockerHub.
 
-The `latest` tag on Docker Hub points to the recent commits in the `master` branch. The [version tags](https://hub.docker.com/r/spotify/techdocs/tags) (e.g. v0.1.1-alpha.24) point to the GitHub tags created from [releases](https://github.com/backstage/backstage/releases) of this GitHub repository.
+The `latest` tag on Docker Hub points to the recent commits in the `main` branch. This is configured by the [main workflow](.github/workflows/main.yml).
 
 Note: We recommend using a specific version of the container instead of `latest` release for stability and avoiding unexpected changes.
