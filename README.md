@@ -20,12 +20,12 @@ docker run -w /content -v $(pwd)/mock-docs:/content -p 8000:8000 -it mkdocs:loca
 
 Then open up `http://localhost:8000` on your local machine.
 
-## Publishing
+## Release
 
-This container is published on DockerHub - https://hub.docker.com/r/spotify/techdocs
+1. When you are ready to create a new release head over to [releases](https://github.com/backstage/techdocs-container/releases) and click on `Draft a new release`.
 
-The release flow is managed by a [GitHub actions workflow](.github/workflows/release-tag.yml). Whenever a new [release](https://github.com/backstage/techdocs-container/releases) is published on GitHub, the workflow pushes the tag to DockerHub.
+2. Use an incremental version number for the release e.g. v2.2.1 and use that as the tag version. Github will create a new tag if the tag doesn't exist. Fill out the rest of the fields and click `Publish release`.
 
-The `latest` tag on Docker Hub points to the recent commits in the `main` branch. This is configured by the [main workflow](.github/workflows/main.yml).
+The release flow is managed by a [GitHub actions workflow](.github/workflows/release-tag.yml). Whenever a new [release](https://github.com/backstage/techdocs-container/releases) is published on GitHub, the workflow pushes the tag to [DockerHub](https://hub.docker.com/r/spotify/techdocs).
 
-Note: We recommend using a specific version of the container instead of `latest` release for stability and avoiding unexpected changes.
+Note: The `latest` tag on DockerHub points to the recent commits in the `main` branch. This is configured by the [main workflow](.github/workflows/main.yml). We recommend using a specific version of the container instead of `latest` release for stability and avoiding unexpected changes.
