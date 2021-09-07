@@ -23,6 +23,10 @@ RUN curl -o plantuml.jar -L http://sourceforge.net/projects/plantuml/files/plant
 RUN pip install --upgrade pip && pip install mkdocs-techdocs-core==0.1.2
 
 # Create script to call plantuml.jar from a location in path
+#   When adding TechDocs to the Backstage Backend container, avoid this
+#   error (OSError: [Errno 8] Exec format error: 'plantuml') by using the
+#   following RUN command instead:
+#   RUN echo '#!/bin/sh\n\njava -jar '/opt/plantuml.jar' ${@}' >> /usr/local/bin/plantuml
 RUN echo $'#!/bin/sh\n\njava -jar '/opt/plantuml.jar' ${@}' >> /usr/local/bin/plantuml
 RUN chmod 755 /usr/local/bin/plantuml
 
