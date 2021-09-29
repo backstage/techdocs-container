@@ -26,6 +26,8 @@ Then open up `http://localhost:8000` on your local machine.
 
 2. Use an incremental version number for the release e.g. v2.2.1 and use that as the tag version. Github will create a new tag if the tag doesn't exist. Fill out the rest of the fields and click `Publish release`.
 
+3. Once released, consider updating the default version used in [techdocs-common's TechdocsGenerator](https://github.com/backstage/backstage/blob/master/packages/techdocs-common/src/stages/generate/techdocs.ts#L42).
+
 The release flow is managed by a [GitHub actions workflow](.github/workflows/release-tag.yml). Whenever a new [release](https://github.com/backstage/techdocs-container/releases) is published on GitHub, the workflow pushes the tag to [DockerHub](https://hub.docker.com/r/spotify/techdocs).
 
 Note: The `latest` tag on DockerHub points to the recent commits in the `main` branch. This is configured by the [main workflow](.github/workflows/main.yml). We recommend using a specific version of the container instead of `latest` release for stability and avoiding unexpected changes.
