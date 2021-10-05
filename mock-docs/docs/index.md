@@ -101,5 +101,22 @@ const addThingToThing = (a, b) a + b;
     }
 ```
 
+# MDX truly sane lists
+
+- attributes
+
+- customer
+  - first_name
+    - test
+  - family_name
+  - email
+- person
+  - first_name
+  - family_name
+  - birth_date
+- subscription_id
+
+- request
+
 <!-- prettier-ignore -->
 *[MOCDOC]: Mock Documentation
