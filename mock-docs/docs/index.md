@@ -59,7 +59,19 @@ digraph G {
 @enduml
 ```
 
-:bulb:
+# Emojis
+
+:bulb: :smile:
+
+# Code blocks
+
+```javascript
+import { test } from 'something';
+
+const addThingToThing = (a, b) a + b;
+```
+
+# Grouped Code blocks
 
 === "JavaScript"
 
@@ -89,11 +101,22 @@ digraph G {
     }
 ```
 
-```javascript
-import { test } from 'something';
+# MDX truly sane lists
 
-const addThingToThing = (a, b) a + b;
-```
+- attributes
+
+- customer
+  - first_name
+    - test
+  - family_name
+  - email
+- person
+  - first_name
+  - family_name
+  - birth_date
+- subscription_id
+
+- request
 
 <!-- prettier-ignore -->
 *[MOCDOC]: Mock Documentation
