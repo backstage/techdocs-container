@@ -59,7 +59,19 @@ digraph G {
 @enduml
 ```
 
-:bulb:
+# Emojis
+
+:bulb: :smile:
+
+# Code blocks
+
+```javascript
+import { test } from 'something';
+
+const addThingToThing = (a, b) a + b;
+```
+
+# Grouped Code blocks
 
 === "JavaScript"
 
@@ -87,12 +99,6 @@ digraph G {
     public void function() {
       test();
     }
-```
-
-```javascript
-import { test } from 'something';
-
-const addThingToThing = (a, b) a + b;
 ```
 
 <!-- prettier-ignore -->
