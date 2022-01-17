@@ -4,6 +4,7 @@ site_description: 'mock-docs site description'
 nav:
   - Home: index.md
   - SubDocs: '!include ./sub-docs/mkdocs.yml'
+  - Plugins: '*include ./plugins/*/mkdocs.yml'
 
 plugins:
   - techdocs-core
