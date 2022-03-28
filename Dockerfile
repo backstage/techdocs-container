@@ -20,8 +20,7 @@ RUN apk update && apk --no-cache add gcc musl-dev openjdk11-jdk curl graphviz tt
 # Download plantuml file, Validate checksum & Move plantuml file
 RUN curl -o plantuml.jar -L http://sourceforge.net/projects/plantuml/files/plantuml.1.2021.12.jar/download && echo "a3d10c17ab1158843a7a7120dd064ba2eda4363f  plantuml.jar" | sha1sum -c - && mv plantuml.jar /opt/plantuml.jar
 
-RUN pip install --upgrade pip && pip install mkdocs-techdocs-core==1.0.1
-
+RUN pip install --upgrade pip && pip install mkdocs-techdocs-core==1.0.1 mkdocs-mermaid2-plugin==0.5.2
 # Create script to call plantuml.jar from a location in path
 #   When adding TechDocs to the Backstage Backend container, avoid this
 #   error (OSError: [Errno 8] Exec format error: 'plantuml') by using the
