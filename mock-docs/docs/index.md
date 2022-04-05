@@ -59,6 +59,14 @@ digraph G {
 @enduml
 ```
 
+# Mermaid Samples
+
+```mermaid
+graph LR
+A[Docs] --> B[Charts] --> C[WoW]
+```
+
+
 # Emojis
 
 :bulb: :smile:

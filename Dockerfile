@@ -15,12 +15,18 @@
 FROM python:3.8-alpine
 
 
-RUN apk update && apk --no-cache add gcc musl-dev openjdk11-jdk curl graphviz ttf-dejavu fontconfig
+RUN apk update && apk --no-cache add gcc musl-dev openjdk11-jdk curl graphviz ttf-dejavu fontconfig nodejs npm chromium
 
 # Download plantuml file, Validate checksum & Move plantuml file
 RUN curl -o plantuml.jar -L http://sourceforge.net/projects/plantuml/files/plantuml.1.2021.12.jar/download && echo "a3d10c17ab1158843a7a7120dd064ba2eda4363f  plantuml.jar" | sha1sum -c - && mv plantuml.jar /opt/plantuml.jar
 
-RUN pip install --upgrade pip && pip install mkdocs-techdocs-core==1.0.1
+# Download mermaid cli
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+RUN npm install -g @mermaid-js/mermaid-cli@8.14.0
+
+RUN pip install --upgrade pip && pip install mkdocs-techdocs-core==1.0.1 markdown-inline-mermaid==1.0.2
 
 # Create script to call plantuml.jar from a location in path
 #   When adding TechDocs to the Backstage Backend container, avoid this
