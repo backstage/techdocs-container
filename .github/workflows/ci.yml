@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [[self-hosted, qa]]
         python-version: [3.7]
 
     name: Python ${{ matrix.node-version }} on ${{ matrix.os }}

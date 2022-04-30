@@ -8,7 +8,7 @@ on:
 
 jobs:
   main:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, qa]
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -28,7 +28,7 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: spotify/techdocs:latest
+          tags: emccullagh/techdocs:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

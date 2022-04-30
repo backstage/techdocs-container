@@ -4,5 +4,5 @@
 # The last matching pattern takes precedence.
 # https://help.github.com/articles/about-codeowners/
 
-*         @backstage/techdocs-core
+*         @bazaarvoice/backstage
 
