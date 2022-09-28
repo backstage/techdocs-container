@@ -14,8 +14,7 @@
 
 FROM python:3.8-alpine
 
-
-RUN apk update && apk --no-cache add gcc musl-dev openjdk11-jdk curl graphviz ttf-dejavu fontconfig
+RUN apk update && apk --no-cache add gcc musl-dev openjdk17-jdk curl graphviz ttf-dejavu fontconfig
 
 # Download plantuml file, Validate checksum & Move plantuml file
 RUN curl -o plantuml.jar -L http://sourceforge.net/projects/plantuml/files/plantuml.1.2022.4.jar/download && echo "246d1ed561ebbcac14b2798b45712a9d018024c0  plantuml.jar" | sha1sum -c - && mv plantuml.jar /opt/plantuml.jar
