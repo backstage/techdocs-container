@@ -4,4 +4,4 @@ metadata:
   name: techdocs-container
 spec:
   type: library
-  owner: pulp-fiction
+  owner: protean
