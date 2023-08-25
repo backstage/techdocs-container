@@ -2,7 +2,7 @@ name: Close Stale Issues and PRs Automatically
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/10 * * * *' # run every 10 minutes as it also removes labels.
+    - cron: '0 1 * * *' # run once a day as it also removes labels.
 
 jobs:
   stale:
