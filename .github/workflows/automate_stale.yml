@@ -28,4 +28,4 @@ jobs:
           days-before-pr-close: 7
           exempt-pr-labels: after-vacations,will-fix
           stale-pr-label: stale
-          operations-per-run: 
+          operations-per-run: 100
