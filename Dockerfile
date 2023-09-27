@@ -26,6 +26,11 @@ RUN pip install --upgrade pip && pip install mkdocs-techdocs-core==1.2.2
 #   error (OSError: [Errno 8] Exec format error: 'plantuml') by using the
 #   following RUN command instead:
 #   RUN echo '#!/bin/sh\n\njava -jar '/opt/plantuml.jar' ${@}' >> /usr/local/bin/plantuml
+
+#   When adding TechDocs with PlantUML diagrams, to refer external puml or pu files in any markdown file,
+#   eg. '!include <referencedFileName.puml>', you'll need to include the diagrams directory eg. docs in the classpath.
+#   Use following RUN command instead:
+#   RUN echo $'#!/bin/sh\n\njava -Dplantuml.include.path=${diagramDir} -jar '/opt/plantuml.jar ' ${@}' >> /usr/local/bin/plantuml
 RUN echo $'#!/bin/sh\n\njava -jar '/opt/plantuml.jar' ${@}' >> /usr/local/bin/plantuml
 RUN chmod 755 /usr/local/bin/plantuml
 
