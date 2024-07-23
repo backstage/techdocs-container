@@ -34,7 +34,7 @@ Note: The `latest` tag on DockerHub points to the recent commits in the `main` b
 
 ## Updating PlantUML
 
-PlantUML is a Java based tool which is packaged in a single JAR file. You can fine the latest released in their [GitHub repo under Releases](https://github.com/plantuml/plantuml/releases). When updating the Docker file with a new release of PlantUML you'll need to download the relevant JAR file first and then generate a checksum using `sha1sum`. Here are the steps:
+PlantUML is a Java based tool which is packaged in a single JAR file. You can find the latest released in their [GitHub repo under Releases](https://github.com/plantuml/plantuml/releases). When updating the Docker file with a new release of PlantUML you'll need to download the relevant JAR file first and then generate a checksum using `sha1sum`. Here are the steps:
 
 1. Download the JAR file: `curl -o plantuml.jar -L https://github.com/plantuml/plantuml/releases/download/v1.2024.6/plantuml-1.2024.6.jar`
 2. Generate the checksum: `sha1sum plantuml.jar`
