@@ -31,3 +31,11 @@ Then open up `http://localhost:8000` on your local machine.
 The release flow is managed by a [GitHub actions workflow](.github/workflows/release-tag.yml). Whenever a new [release](https://github.com/backstage/techdocs-container/releases) is published on GitHub, the workflow pushes the tag to [DockerHub](https://hub.docker.com/r/spotify/techdocs).
 
 Note: The `latest` tag on DockerHub points to the recent commits in the `main` branch. This is configured by the [main workflow](.github/workflows/main.yml). We recommend using a specific version of the container instead of `latest` release for stability and avoiding unexpected changes.
+
+## Updating PlantUML
+
+PlantUML is a Java based tool which is packaged in a single JAR file. You can fine the latest released in their [GitHub repo under Releases](https://github.com/plantuml/plantuml/releases). When updating the Docker file with a new release of PlantUML you'll need to download the relevant JAR file first and then generate a checksum using `sha1sum`. Here are the steps:
+
+1. Download the JAR file: `curl -o plantuml.jar -L https://github.com/plantuml/plantuml/releases/download/v1.2024.6/plantuml-1.2024.6.jar`
+2. Generate the checksum: `sha1sum plantuml.jar`
+3. Update the Dockerfile file with the proper release URL and checksum
