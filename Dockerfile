@@ -19,7 +19,7 @@ RUN apk update && apk --no-cache add gcc musl-dev openjdk17-jdk curl graphviz tt
 # Download plantuml file, Validate checksum & Move plantuml file
 RUN curl -o plantuml.jar -L https://github.com/plantuml/plantuml/releases/download/v1.2024.6/plantuml-1.2024.6.jar && echo "3e944755cbed59e1ed9332691d92294bef7bbcda  plantuml.jar" | sha1sum -c - && mv plantuml.jar /opt/plantuml.jar
 
-RUN pip install --upgrade pip && pip install mkdocs-techdocs-core==1.3.5
+RUN pip install --upgrade pip && pip install mkdocs-techdocs-core==1.4.2
 
 # Create script to call plantuml.jar from a location in path
 #   When adding TechDocs to the Backstage Backend container, avoid this
