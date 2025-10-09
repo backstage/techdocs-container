@@ -1,16 +1,51 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:best-practices", ":gitSignOff"],
-  "labels": ["dependencies"],
+  "extends": [
+    "config:best-practices",
+    ":gitSignOff"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "enabledManagers": [
+    "dockerfile",
+    "pip_requirements"
+  ],
+  "dockerfile": {
+    "enabled": true
+  },
   "packageRules": [
     {
-      "matchUpdateTypes": ["major", "minor", "patch"],
-      "addLabels": ["{{ updateType }}"]
+      "description": "Automerge minor and patch updates for pip deps",
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "addLabels": [
+        "{{ updateType }}"
+      ],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Separate major updates - require manual review",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false,
+      "labels": [
+        "major-update",
+        "dependencies"
+      ]
     }
   ],
   "osvVulnerabilityAlerts": true,
   "vulnerabilityAlerts": {
-    "addLabels": ["security"],
+    "addLabels": [
+      "security"
+    ],
     "enabled": true
   }
 }
