@@ -11,9 +11,6 @@
     "dockerfile",
     "pip_requirements"
   ],
-  "dockerfile": {
-    "enabled": true
-  },
   "packageRules": [
     {
       "description": "Automerge minor and patch updates for pip deps",
