@@ -17,7 +17,8 @@ FROM python:3.14-alpine@sha256:faee120f7885a06fcc9677922331391fa690d911c020abb9e
 RUN apk update && apk --no-cache add gcc musl-dev openjdk17-jdk curl graphviz ttf-dejavu fontconfig
 
 # Download plantuml file, Validate checksum & Move plantuml file
-RUN curl -o plantuml.jar -L https://github.com/plantuml/plantuml/releases/download/v1.2024.6/plantuml-1.2024.6.jar && echo "3e944755cbed59e1ed9332691d92294bef7bbcda  plantuml.jar" | sha1sum -c - && mv plantuml.jar /opt/plantuml.jar
+RUN curl -o plantuml.jar -L https://github.com/plantuml/plantuml/releases/download/v1.2026.2/plantuml-1.2026.2.jar \
+    && echo "55884e11f3f1075d4778a9ebaa9244d530a74391  plantuml.jar" | sha1sum -c - && mv plantuml.jar /opt/plantuml.jar
 
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
