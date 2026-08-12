@@ -22,7 +22,7 @@ COPY --from=plantuml/plantuml:1.2026.2@sha256:711a0cdf56a46d9bfac8fcc4c08872cd47
     /opt/plantuml.jar /opt/plantuml.jar
 
 COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Create script to call plantuml.jar from a location in path
 #   printf is what avoids this error (OSError: [Errno 8] Exec format error: 'plantuml')
