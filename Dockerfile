@@ -25,14 +25,14 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Create script to call plantuml.jar from a location in path
-#   printf is what avoids this error (OSError: [Errno 8] Exec format error: 'plantuml')
-#   when adding TechDocs to the Backstage Backend container: shells without $'' support,
-#   eg. dash, write a literal `$` into the shebang from `echo $'...'`.
-
 #   When adding TechDocs with PlantUML diagrams, to refer external puml or pu files in any markdown file,
 #   eg. '!include <referencedFileName.puml>', you'll need to include the diagrams directory eg. docs in the classpath.
 #   Use following RUN command instead:
 #   RUN printf '#!/bin/sh\nexec java -Dplantuml.include.path=${diagramDir} -jar /opt/plantuml.jar "$@"\n' > /usr/local/bin/plantuml && chmod 755 /usr/local/bin/plantuml
+
+#   "$@", not ${@}: unquoted, docs paths containing spaces get split into separate args.
+#   printf also copies as-is into the Backstage Backend container, where the echo form failed
+#   with: OSError: [Errno 8] Exec format error: 'plantuml'
 RUN printf '#!/bin/sh\nexec java -jar /opt/plantuml.jar "$@"\n' > /usr/local/bin/plantuml \
     && chmod 755 /usr/local/bin/plantuml
 
