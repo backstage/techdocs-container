@@ -13,11 +13,11 @@ jobs:
 
     name: Python ${{ matrix.node-version }} on ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2
 
       # Build Docker Image
       - name: Build Docker image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@0a97817b6ade9f46837855d676c4cca3a2471fc9 # v4
         with:
           path: .
           push: false
