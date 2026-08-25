@@ -16,24 +16,24 @@ FROM python:3.14-alpine@sha256:05b2b8b732ecd268fee8727a369f936f022d1321b59befd13
 
 RUN apk update && apk --no-cache add gcc musl-dev openjdk17-jdk curl graphviz ttf-dejavu fontconfig
 
-# Download plantuml file, Validate checksum & Move plantuml file
-RUN curl -o plantuml.jar -L https://github.com/plantuml/plantuml/releases/download/v1.2026.2/plantuml-1.2026.2.jar \
-    && echo "55884e11f3f1075d4778a9ebaa9244d530a74391  plantuml.jar" | sha1sum -c - && mv plantuml.jar /opt/plantuml.jar
+# Take the plantuml jar from the official image, pinned by tag and digest so Renovate
+# keeps it updated.
+COPY --from=plantuml/plantuml:1.2026.2@sha256:711a0cdf56a46d9bfac8fcc4c08872cd47e1bd31cd87f2d0268ebe75a6b100ee \
+    /opt/plantuml.jar /opt/plantuml.jar
 
 COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Create script to call plantuml.jar from a location in path
-#   When adding TechDocs to the Backstage Backend container, avoid this
-#   error (OSError: [Errno 8] Exec format error: 'plantuml') by using the
-#   following RUN command instead:
-#   RUN echo '#!/bin/sh\n\njava -jar '/opt/plantuml.jar' ${@}' >> /usr/local/bin/plantuml
-
 #   When adding TechDocs with PlantUML diagrams, to refer external puml or pu files in any markdown file,
 #   eg. '!include <referencedFileName.puml>', you'll need to include the diagrams directory eg. docs in the classpath.
 #   Use following RUN command instead:
-#   RUN echo $'#!/bin/sh\n\njava -Dplantuml.include.path=${diagramDir} -jar '/opt/plantuml.jar ' ${@}' >> /usr/local/bin/plantuml
-RUN echo $'#!/bin/sh\n\njava -jar '/opt/plantuml.jar' ${@}' >> /usr/local/bin/plantuml
-RUN chmod 755 /usr/local/bin/plantuml
+#   RUN printf '#!/bin/sh\nexec java -Dplantuml.include.path=${diagramDir} -jar /opt/plantuml.jar "$@"\n' > /usr/local/bin/plantuml && chmod 755 /usr/local/bin/plantuml
+
+#   "$@", not ${@}: unquoted, docs paths containing spaces get split into separate args.
+#   printf also copies as-is into the Backstage Backend container, where the echo form failed
+#   with: OSError: [Errno 8] Exec format error: 'plantuml'
+RUN printf '#!/bin/sh\nexec java -jar /opt/plantuml.jar "$@"\n' > /usr/local/bin/plantuml \
+    && chmod 755 /usr/local/bin/plantuml
 
 ENTRYPOINT [ "mkdocs" ]

@@ -34,8 +34,10 @@ Note: The `latest` tag on DockerHub points to the recent commits in the `main` b
 
 ## Updating PlantUML
 
-PlantUML is a Java based tool which is packaged in a single JAR file. You can find the latest released in their [GitHub repo under Releases](https://github.com/plantuml/plantuml/releases). When updating the Docker file with a new release of PlantUML you'll need to download the relevant JAR file first and then generate a checksum using `sha1sum`. Here are the steps:
+PlantUML is a Java based tool which is packaged in a single JAR file. The Dockerfile takes the JAR from the official [`plantuml/plantuml`](https://hub.docker.com/r/plantuml/plantuml) image, pinned by tag and digest, so Renovate opens the update PR and no checksum needs to be maintained by hand.
 
-1. Download the JAR file: `curl -o plantuml.jar -L https://github.com/plantuml/plantuml/releases/download/v1.2024.6/plantuml-1.2024.6.jar`
-2. Generate the checksum: `sha1sum plantuml.jar`
-3. Update the Dockerfile file with the proper release URL and checksum
+To bump it manually, update both the tag and the digest on the `COPY --from=plantuml/plantuml:...` line. Get the digest for a version with:
+
+```bash
+docker buildx imagetools inspect plantuml/plantuml:1.2026.2
+```
