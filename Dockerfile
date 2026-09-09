@@ -18,7 +18,7 @@ RUN apk update && apk --no-cache add gcc musl-dev openjdk17-jdk curl graphviz tt
 
 # Take the plantuml jar from the official image, pinned by tag and digest so Renovate
 # keeps it updated.
-COPY --from=plantuml/plantuml:1.2026.7@sha256:f2c8916a795483bf32ea61ca63b1c6726845c0085c997d86431e20b52ca1c257 \
+COPY --from=plantuml/plantuml:1.2026.8@sha256:d08610df482510844382caa4e016ba2bf7e3231f630f02ee12f250f3416c62b1 \
     /opt/plantuml.jar /opt/plantuml.jar
 
 COPY requirements.txt .
